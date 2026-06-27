@@ -8,20 +8,24 @@
              mc:Ignorable="d" 
              Height="450" Width="200"
              >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    
     <StackPanel Orientation="Vertical" >
         <TextBlock Text="{x:Static res:ConstantStrings.Signup}" Height="20px" FontWeight="Bold" />
         <TextBlock Text="{x:Static res:ConstantStrings.Name}"/>
-        <TextBox Text="{Binding Name}"/>
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="{x:Static res:ConstantStrings.Surname}"/>
-        <TextBox Text="{Binding Surname}"/>
+        <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="{x:Static res:ConstantStrings.Email}"/>
-        <TextBox Text="{Binding Email}"/>
+        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="{x:Static res:ConstantStrings.Username}"/>
-        <TextBox Text="{Binding Username}"/>
+        <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="{x:Static res:ConstantStrings.Password}" />
-        <TextBox Text="{Binding Password}" />
-        <TextBlock Text="" />
-        <Button Margin="4" Content="{x:Static res:ConstantStrings.Signup}" Command="{Binding Signup}" />
+        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="{Binding ErrorMessage}" Visibility="{Binding IsVisibleError, Converter={StaticResource BoolToVis}}" />
+        <Button Margin="4" Content="{x:Static res:ConstantStrings.Signup}" Command="{Binding Signup}" IsEnabled="{Binding IsEnabledSignup}" />
         <TextBlock Margin="4" Text="{x:Static res:ConstantStrings.IHaveAccountAlready}">
             <Hyperlink Command="{Binding Login}" >
                 <Run Text="{x:Static res:ConstantStrings.Login}"/>

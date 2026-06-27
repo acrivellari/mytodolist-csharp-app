@@ -13,6 +13,9 @@
             <DataTemplate DataType="{x:Type vm:SignupPageVM}">
                 <views:SignupPageView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:HomePageVM}">
+                <views:HomePageView />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -19,7 +19,8 @@ public class MainWindowViewModel : ObservableObject, IRecipient<NavigationReques
         _viewModels = new Dictionary<PageNames, MyViewModel>()
         {
             { PageNames.Login, new LoginPageVM(messenger) },
-            { PageNames.Signup, new SignupPageVM(messenger) }
+            { PageNames.Signup, new SignupPageVM(messenger) },
+            { PageNames.Homepage, new HomePageVM(messenger) }
         };
 
         Receive(new NavigationRequestMessage(PageNames.Login));

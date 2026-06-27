@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using MyToDoList.Application;
 using MyToDoList.Models;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,9 @@ public class LoginPageVM : MyViewModel
         else
         {
             MessageBox.Show("Success");
+            var sessionContext = SessionContext.Instance;
+            sessionContext.SetLoggedInUser(Username);
+            _messenger.Send(new NavigationRequestMessage(PageNames.Homepage));
         }
     }
 

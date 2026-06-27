@@ -5,13 +5,24 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyToDoList.Models;
+namespace MyToDoList.Application;
 
 class AuthenticationUtils
 {
     public static async Task<bool> DoLogin(string username, string password)
     {
-        return await ApiClient.DoLogin(username, EncodeInMd5(password));
+        var dto = await ApiClient.DoLogin(username, EncodeInMd5(password));
+        if (DateTimeOffset.TryParse(dto?.expires_in, out DateTimeOffset date))
+        {
+            if (date.UtcDateTime > DateTimeOffset.UtcNow)
+            {
+                SessionContext.Instance.SetAccessToken(dto.access_token);
+                SessionContext.Instance.SetTokenExpireDate(date);
+
+                // DPAPI 
+            }
+        }
+        return dto is not null;
     }
 
     public static async Task<bool> SignUp(string name, string surname, string username, string password, string email)

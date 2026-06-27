@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="MyToDoList.Views.HomePageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyToDoList.Views"
+             xmlns:res="clr-namespace:MyToDoList.Resources"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
+            
+            <Button Command="{Binding LoginCommand}"
+                    ToolTip="{Binding DisplayedUsername}"
+                    Width="40" 
+                    Height="40" 
+                    Cursor="Hand"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Padding="0">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <!-- Visual Circle Shape -->
+                            <Ellipse Fill="#007ACC" 
+                                     Width="40" 
+                                     Height="40"/>
+                            <!-- Icon Text (e.g., first letter of username or a generic icon) -->
+                            <TextBlock Text="U" 
+                                       Foreground="White" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       FontWeight="Bold" 
+                                       FontSize="18"/>
+                        </Grid>
+
+                        <!-- Template Triggers for Hover/Press States -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.95" ScaleY="0.95" CenterX="20" CenterY="20"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+
+        <Border Grid.Row="1" Margin="20" CornerRadius="8" Background="White" Padding="20">
+            <TextBlock Text="Main Application Content" 
+                       FontSize="24" 
+                       FontWeight="SemiBold" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       Foreground="#555555"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -7,28 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyToDoList.Models;
+namespace MyToDoList.Application;
 
 class ApiClient
 {
     private const string BaseUrl = "https://acriveeu.netsons.org/api";
-    public static async Task<bool> DoLogin(string username, string pwd)
+    public static async Task<DoLoginResponse?> DoLogin(string username, string pwd)
     {
         try
         {
-            var json = await BaseUrl
+            return await BaseUrl
                 .AppendPathSegment("users")
-                .AppendPathSegment("login")
+                .AppendPathSegment("authenticate")
                 .PostJsonAsync(new DoLoginRequestBody 
                 { 
                     username = username, 
                     password = pwd 
                 })
                 .ReceiveJson<DoLoginResponse>();
-            return true;
         }
-        catch { }
-        return false;
+        catch { return null; }
     }
 
     public static async Task<bool> DoSignup(string username, string password, string name, string surname, string email)

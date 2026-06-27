@@ -1,14 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿namespace MyToDoList;
 
-namespace MyToDoList
-{
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-    }
-
-}
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : System.Windows.Application { }
